@@ -6,7 +6,11 @@
     secondList = sortList lists.secondList;
     distanceList = computeDistanceList firstList secondList;
     answer = sum distanceList;
-  in answer;
+    similarityAnswer = similarity firstList secondList;
+  in {
+    inherit answer;
+    inherit similarityAnswer;
+  };
 
   parseFile = let
     inputContent = builtins.readFile ./input.txt;
@@ -36,4 +40,12 @@
     in lib.zipListsWith computeDistance firstList secondList;
 
   sum = list: builtins.foldl' (x: y: x + y) 0 list;
+
+  similarityElement = element: list:
+    let filteredList = builtins.filter (e: e == element) list;
+    in builtins.length filteredList * element;
+
+  similarity = firstList: secondList:
+    let countList = builtins.map (e: similarityElement e secondList) firstList;
+    in sum countList;
 }

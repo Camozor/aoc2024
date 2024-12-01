@@ -23,5 +23,15 @@ in runTests {
     expr = day1.sum [ 1 2 3 4 5 ];
     expected = 5 * 6 / 2;
   };
+
+  test_similarityElement = {
+    expr = day1.similarityElement 3 [ 4 3 5 3 9 3 ];
+    expected = 9;
+  };
+
+  test_similarity = {
+    expr = day1.similarity [ 3 4 2 1 3 3 ] [ 4 3 5 3 9 3 ];
+    expected = 31;
+  };
 }
 
